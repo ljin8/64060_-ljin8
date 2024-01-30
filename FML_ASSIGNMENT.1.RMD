@@ -1,0 +1,63 @@
+---
+Title: 64060#ljin8-Assignment_1
+Author: Lei Jin
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+```{r}
+
+#install.packages("readxl")
+library(readxl)
+library(tinytex)
+
+#Read the excel data file (.xlsx) and call it "myData"
+myData <- read_excel("C:/Users/leile/OneDrive/School-Kent/BAI/mydata/Module3/Birth_Life.xlsx")
+View(myData)
+str(myData)
+dim(myData)
+```
+
+```{r}
+# Get the summary statistics
+summary (myData)
+```
+
+```{r}
+# Descriptive statistics for quantitative variables
+summary (myData$Birth_Rate)
+
+# Descriptive statistics for categorical variable
+table(myData$'Country Name')
+```
+
+
+```{r}
+# Transform a variable (e.g., square root transformation)
+Transform_Life_Exp <- sqrt(myData$Life_Exp)
+summary (Transform_Life_Exp)
+```
+
+```{r}
+# Plot a quantitative variable
+hist(myData$Birth_Rate, 
+     main = "Histogram of Birth Rate", 
+     xlab = "Birth Rate (in %)", 
+     col = "lightblue")
+     abline (h=0)
+hist
+```
+
+```{r}
+# Do the scatter plot for Birth Rate and Life Expectancy
+plot ( myData$Birth_Rate ~ myData$Life_Exp, 
+       main = "Scatter plot for Birth Rate against Life Expectancy", 
+       xlab="Life Expectancy (in years)", 
+       ylab = "Birth Rate (in %)", 
+       pch=16, 
+       col = ifelse ( myData$Development == "Developing", 20, 26) )
+legend ("topright", legend = c("Developing", "Developed"), pch=16, col = c(20, 26) )
+
+```
